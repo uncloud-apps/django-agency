@@ -1,5 +1,7 @@
 # Server Adoption Agency
 
+> **Demo app** — not intended for production use. SECRET_KEY is committed, DEBUG is on, and there is no real auth beyond Django admin.
+
 A Django demo app for the meetup talk. A shelter for abandoned servers whose previous owners moved to the cloud.
 
 Built with Django 6, HTMX, Tailwind (CDN), SQLite.

@@ -1,0 +1,8 @@
+*
+
+!manage.py
+!pyproject.toml
+!uv.lock
+!server_adoption/**/*.py
+!shelter/**/*.py
+!shelter/**/templates/**

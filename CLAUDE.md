@@ -43,6 +43,7 @@ uv run python manage.py test shelter
 - The admin `approve_selected` action is the main staff workflow — it flips application to Approved, stamps the server Adopted, and copies the applicant name. Keep it in one action, not split.
 - `seed_shelter` uses `get_or_create` on slug — safe to run multiple times.
 - No comments unless the reason is non-obvious.
+- Use type hints on all functions and methods. Prefer modern Python syntax: `X | Y` unions, `list[X]`/`dict[K, V]` built-in generics, `str | None` over `Optional[str]`.
 
 ## Deployment
 
