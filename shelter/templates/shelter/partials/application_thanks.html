@@ -1,0 +1,12 @@
+<div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-8 text-center">
+  <div class="text-5xl mb-4">&#127968;</div>
+  <h3 class="text-xl font-bold text-emerald-800 mb-2">Application received!</h3>
+  <p class="text-emerald-700 mb-4">
+    Thank you, <strong>{{ application.applicant_name }}</strong>. Our team will review your application
+    for <strong>{{ server.name }}</strong> and get back to you shortly.
+  </p>
+  <p class="text-stone-500 text-sm">
+    You can check your application status at any time:
+    <a href="/applications/{{ application.pk }}/" class="underline text-stone-700">view status</a>
+  </p>
+</div>

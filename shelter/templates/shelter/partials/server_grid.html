@@ -1,0 +1,13 @@
+{% if servers %}
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for server in servers %}
+      {% include "shelter/partials/server_card.html" %}
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="text-center py-20 text-stone-400">
+    <div class="text-5xl mb-4">&#128187;</div>
+    <p class="text-lg">No servers match your filters.</p>
+    <p class="text-sm mt-1">Try broadening your search &mdash; there are so many in need of a home.</p>
+  </div>
+{% endif %}

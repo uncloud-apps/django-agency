@@ -1,0 +1,48 @@
+{% extends "shelter/base.html" %}
+
+{% block title %}Browse Servers — Server Adoption Agency{% endblock %}
+
+{% block content %}
+
+<div class="flex gap-8">
+
+  <aside class="w-56 flex-shrink-0">
+    <h2 class="text-lg font-bold mb-4">Filter</h2>
+    <form
+      hx-get="/servers/"
+      hx-target="#server-grid"
+      hx-trigger="change"
+      hx-push-url="true"
+      method="get"
+    >
+      <div class="space-y-5">
+        {% for field in filter_form %}
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1">
+              {{ field.label }}
+            </label>
+            {% if field.field.widget.input_type == 'checkbox' %}
+              <label class="flex items-center gap-2 cursor-pointer text-sm">
+                {{ field }} {{ field.label }}
+              </label>
+            {% else %}
+              <select name="{{ field.html_name }}"
+                      class="w-full border border-stone-300 rounded-lg px-2 py-1.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-stone-400">
+                {% for value, label in field.field.choices %}
+                  <option value="{{ value }}" {% if field.value == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+              </select>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </form>
+  </aside>
+
+  <div class="flex-1" id="server-grid">
+    {% include "shelter/partials/server_grid.html" %}
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "shelter/base.html" %}
+
+{% block title %}Application Status — Server Adoption Agency{% endblock %}
+
+{% block content %}
+
+<div class="max-w-lg mx-auto">
+  <a href="/servers/" class="text-stone-500 text-sm hover:text-stone-700 mb-6 inline-block">&larr; Back to listings</a>
+
+  <div class="bg-white rounded-2xl border border-stone-200 p-8">
+    <h1 class="text-2xl font-bold mb-1">Application Status</h1>
+    <p class="text-stone-500 text-sm mb-6">For {{ application.server.name }}</p>
+
+    <dl class="space-y-3 text-sm mb-6">
+      <div class="flex justify-between">
+        <dt class="text-stone-500">Applicant</dt>
+        <dd class="font-medium">{{ application.applicant_name }}</dd>
+      </div>
+      <div class="flex justify-between">
+        <dt class="text-stone-500">Server</dt>
+        <dd class="font-medium">{{ application.server.name }}</dd>
+      </div>
+      <div class="flex justify-between">
+        <dt class="text-stone-500">Submitted</dt>
+        <dd class="font-medium">{{ application.created_at|date:"N j, Y" }}</dd>
+      </div>
+      <div class="flex justify-between">
+        <dt class="text-stone-500">Status</dt>
+        <dd class="font-semibold
+          {% if application.review_status == 'approved' %}text-emerald-700
+          {% elif application.review_status == 'declined' %}text-red-600
+          {% else %}text-amber-600{% endif %}">
+          {{ application.get_review_status_display }}
+        </dd>
+      </div>
+    </dl>
+
+    {% if application.review_status == 'pending' %}
+      <p class="text-stone-500 text-sm bg-amber-50 rounded-lg p-3">
+        Your application is under review. Our team will be in touch at
+        {{ application.applicant_email }}.
+      </p>
+    {% elif application.review_status == 'approved' %}
+      <p class="text-emerald-700 text-sm bg-emerald-50 rounded-lg p-3">
+        Congratulations! Your application has been approved.
+        Welcome {{ application.server.name }} home.
+      </p>
+    {% else %}
+      <p class="text-stone-600 text-sm bg-stone-50 rounded-lg p-3">
+        Unfortunately your application wasn't approved this time.
+        Please consider <a href="/servers/" class="underline">other servers</a> who need a home.
+      </p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

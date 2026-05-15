@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=server_adoption.settings
+    volumes:
+      - db:/app/db.sqlite3
+      - media:/app/media
+    restart: unless-stopped
+
+volumes:
+  db:
+  media:

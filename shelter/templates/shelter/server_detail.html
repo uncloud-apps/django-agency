@@ -1,0 +1,104 @@
+{% extends "shelter/base.html" %}
+{% load shelter_extras %}
+
+{% block title %}{{ server.name }} — Server Adoption Agency{% endblock %}
+
+{% block content %}
+
+<a href="/servers/" class="text-stone-500 text-sm hover:text-stone-700 mb-6 inline-block">&larr; Back to listings</a>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+  <div>
+    {% if server.portrait %}
+      <img src="{{ server.portrait.url }}" alt="Portrait of {{ server.name }}"
+           class="w-full rounded-2xl shadow mb-6 object-cover" style="max-height: 400px;">
+    {% else %}
+      <div class="w-full rounded-2xl bg-stone-100 flex items-center justify-center text-9xl mb-6" style="height: 300px;">
+        {{ server.species|species_emoji }}
+      </div>
+    {% endif %}
+
+    <div class="bg-white rounded-2xl border border-stone-200 p-6">
+      <h3 class="font-bold text-stone-700 mb-3 text-xs uppercase tracking-wide">Profile</h3>
+      <dl class="space-y-2">
+        <div class="flex justify-between">
+          <dt class="text-stone-500">Species</dt>
+          <dd class="font-medium">{{ server.get_species_display }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-stone-500">Size</dt>
+          <dd class="font-medium">{{ server.get_size_display }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-stone-500">Age</dt>
+          <dd class="font-medium">{{ server.age_years }} years</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-stone-500">Pronouns</dt>
+          <dd class="font-medium">{{ server.get_sex_display }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-stone-500">Status</dt>
+          <dd class="font-medium">{{ server.get_status_display }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-stone-500">Adoption fee</dt>
+          <dd class="font-medium">{{ server.adoption_fee_display }}</dd>
+        </div>
+      </dl>
+
+      {% if server.special_needs %}
+        <div class="mt-4 pt-4 border-t border-stone-100">
+          <p class="text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1">Special needs</p>
+          <p class="text-stone-700">{{ server.special_needs }}</p>
+        </div>
+      {% endif %}
+
+      {% if server.personality_list %}
+        <div class="mt-4 pt-4 border-t border-stone-100">
+          <p class="text-xs font-semibold uppercase tracking-wide text-stone-500 mb-2">Personality</p>
+          <div class="flex flex-wrap gap-2">
+            {% for trait in server.personality_list %}
+              <span class="bg-amber-100 text-amber-800 text-sm px-2 py-0.5 rounded-full">{{ trait }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div>
+    <h1 class="text-3xl font-bold mb-1">{{ server.name }}</h1>
+    <p class="text-stone-500 mb-6">{{ server.age_years }}-year-old {{ server.get_species_display }}</p>
+
+    <div class="prose prose-stone max-w-none mb-8 text-stone-700 leading-relaxed">
+      {{ server.backstory|linebreaks }}
+    </div>
+
+    {% if server.status == 'available' or server.status == 'on_hold' %}
+      <div class="bg-white rounded-2xl border border-stone-200 p-6">
+        <h2 class="text-xl font-bold mb-1">Apply to adopt {{ server.name }}</h2>
+        <p class="text-stone-500 mb-6">
+          Fill out the form below and our team will review your application.
+          We just want to make sure {{ server.name }} goes somewhere good.
+        </p>
+        {% include "shelter/partials/application_form.html" %}
+      </div>
+    {% elif server.status == 'adopted' %}
+      <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-center">
+        <div class="text-4xl mb-3">&#127968;</div>
+        <p class="font-semibold text-emerald-800">{{ server.name }} has been adopted!</p>
+        {% if server.adopted_by_name %}
+          <p class="text-emerald-700 text-sm mt-1">Now living happily with {{ server.adopted_by_name }}.</p>
+        {% endif %}
+        <a href="/servers/" class="inline-block mt-4 text-sm text-emerald-700 underline">
+          Browse other available servers
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}

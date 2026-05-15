@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Server Adoption Agency{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Georgia', 'Cambria', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+  <style>
+    body { font-family: Georgia, Cambria, serif; font-size: 17px; }
+    .mono { font-family: 'Courier New', monospace; }
+  </style>
+</head>
+<body class="bg-amber-50 text-stone-800 min-h-screen flex flex-col">
+
+  <header class="bg-stone-800 text-amber-50 py-4 px-6">
+    <div class="max-w-5xl mx-auto flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-tight hover:text-amber-300 transition-colors">Server Adoption Agency</a>
+      <nav class="flex gap-6 text-xl">
+        <a href="/" class="hover:text-amber-300 transition-colors">Home</a>
+        <a href="/servers/" class="hover:text-amber-300 transition-colors">Browse Servers</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-10">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="border-t border-stone-300 py-6 px-6 text-center text-stone-500 text-sm">
+    <p>Server Adoption Agency &mdash; No server left behind.</p>
+    <p class="mt-1 mono text-xs text-stone-400">All adoptions run on <a href="https://uncloud.run" class="underline hover:text-stone-600">Uncloud</a>.</p>
+  </footer>
+
+</body>
+</html>

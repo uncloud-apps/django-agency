@@ -1,0 +1,65 @@
+{% extends "shelter/base.html" %}
+
+{% block title %}Server Adoption Agency — Every server deserves a home{% endblock %}
+
+{% block content %}
+
+<section class="text-center mb-14">
+  <h1 class="text-4xl font-bold mb-4 leading-tight">
+    These servers were abandoned<br>
+    <span class="text-stone-500 font-normal">when their owners moved to the cloud.</span>
+  </h1>
+  <p class="text-stone-600 max-w-xl mx-auto text-lg leading-relaxed">
+    They're loyal, battle-tested, and ready to serve again. All they need is
+    a stable power supply and someone who gives a rack unit.
+  </p>
+  <a href="/servers/" class="inline-block mt-6 bg-stone-800 text-amber-50 px-8 py-3 rounded-xl text-lg font-semibold hover:bg-stone-700 transition-colors">
+    Browse Available Servers
+  </a>
+</section>
+
+<section class="grid grid-cols-3 gap-4 mb-14 text-center">
+  <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
+    <div class="text-4xl font-bold text-stone-800">{{ stats.available }}</div>
+    <div class="text-stone-500 text-sm mt-1">Awaiting a home</div>
+  </div>
+  <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
+    <div class="text-4xl font-bold text-emerald-700">{{ stats.adopted }}</div>
+    <div class="text-stone-500 text-sm mt-1">Successfully adopted</div>
+  </div>
+  <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
+    <div class="text-4xl font-bold text-amber-600">{{ stats.pending_applications }}</div>
+    <div class="text-stone-500 text-sm mt-1">Pending applications</div>
+  </div>
+</section>
+
+{% if featured %}
+<section class="mb-14">
+  <h2 class="text-2xl font-bold mb-6">Featured Residents</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for server in featured %}
+      {% include "shelter/partials/server_card.html" %}
+    {% endfor %}
+  </div>
+  <div class="text-center mt-8">
+    <a href="/servers/" class="text-stone-600 underline hover:text-stone-800 text-sm">
+      See all available servers &rarr;
+    </a>
+  </div>
+</section>
+{% endif %}
+
+<section class="bg-stone-100 rounded-2xl p-8 text-center">
+  <h2 class="text-xl font-bold mb-3">Our mission</h2>
+  <p class="text-stone-600 max-w-2xl mx-auto leading-relaxed">
+    The cloud revolution left millions of servers without purpose. We believe every machine
+    deserves a second life &mdash; running real workloads, not rusting in a decommissioned data centre.
+    The Server Adoption Agency matches displaced hardware with developers who still believe
+    in owning their infrastructure.
+  </p>
+  <p class="text-stone-400 text-xs mt-4 mono">
+    This shelter runs on three adopted servers, managed with Uncloud.
+  </p>
+</section>
+
+{% endblock %}

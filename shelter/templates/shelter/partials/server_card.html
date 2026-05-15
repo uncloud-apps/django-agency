@@ -1,0 +1,43 @@
+{% load shelter_extras %}
+<div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+
+  <a href="/servers/{{ server.slug }}/">
+    {% if server.portrait %}
+      <img src="{{ server.portrait.url }}" alt="Portrait of {{ server.name }}"
+           class="w-full h-48 object-cover">
+    {% else %}
+      <div class="w-full h-48 bg-stone-100 flex items-center justify-center text-6xl">
+        {{ server.species|species_emoji }}
+      </div>
+    {% endif %}
+  </a>
+
+  <div class="p-5 flex flex-col flex-1">
+    <div class="mb-1">
+      <h3 class="text-lg font-bold">{{ server.name }}</h3>
+    </div>
+
+    <p class="text-stone-500 text-sm mb-3">
+      {{ server.age_years }}-year-old {{ server.get_species_display }} &middot; {{ server.get_size_display }}
+    </p>
+
+    <p class="text-stone-700 text-sm leading-relaxed flex-1 line-clamp-3">
+      {{ server.backstory|truncatewords:15 }}
+    </p>
+
+    <div class="mt-4">
+      <span class="text-xs text-stone-500 block mb-2">{{ server.adoption_fee_display }}</span>
+      {% if server.status == 'available' %}
+        <a href="/servers/{{ server.slug }}/"
+           class="block w-full text-center bg-stone-800 text-amber-50 text-sm px-4 py-2 rounded-lg hover:bg-stone-700 transition-colors">
+          Meet {{ server.name }}
+        </a>
+      {% elif server.status == 'adopted' %}
+        <span class="text-emerald-700 text-sm font-medium">Adopted &#10003;</span>
+      {% else %}
+        <span class="text-stone-400 text-sm">{{ server.get_status_display }}</span>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
