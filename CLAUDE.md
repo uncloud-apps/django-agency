@@ -18,8 +18,6 @@ uv run python manage.py runserver
 uv run python manage.py test shelter
 ```
 
-All 28 tests should pass.
-
 ## Stack
 
 - Django 6, SQLite, gunicorn
@@ -34,14 +32,14 @@ All 28 tests should pass.
 - `shelter/` — the single app (models, views, forms, admin, templates, templatetags)
 - `shelter/management/commands/seed_shelter.py` — idempotent seed with 6 hand-written servers
 - `shelter/templates/shelter/partials/` — HTMX swap targets (server grid, application form, thanks)
-- `shelter/templatetags/shelter_extras.py` — `species_emoji` and `add_class` template filters
+- `shelter/templatetags/shelter_extras.py` — `species_emoji`, `species_accent`, `species_bg`, and `add_class` template filters
 - `media/portraits/` — AI-generated server portraits, gitignored, one per slug
 
 ## Key conventions
 
 - All views are function-based. Keep it that way for demo readability.
 - HTMX-aware views return partials when `request.htmx`, full pages otherwise.
-- `AdoptionApplication` uses a UUID primary key (shareable status URL).
+- `AdoptionApplication` uses a UUID primary key (shareable status URL). Fields: applicant contact info, decibel tolerance, why_this_server.
 - The admin `approve_selected` action is the main staff workflow — it flips application to Approved, stamps the server Adopted, and copies the applicant name. Keep it in one action, not split.
 - `seed_shelter` uses `get_or_create` on slug — safe to run multiple times.
 - No comments unless the reason is non-obvious.

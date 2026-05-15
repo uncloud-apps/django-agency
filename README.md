@@ -4,6 +4,8 @@ A Django demo app for the meetup talk. A shelter for abandoned servers whose pre
 
 Built with Django 6, HTMX, Tailwind (CDN), SQLite.
 
+Developed with AI assistance.
+
 ## Run locally
 
 ```bash
