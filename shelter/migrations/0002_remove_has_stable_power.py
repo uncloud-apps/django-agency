@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('shelter', '0001_initial'),
+        ("shelter", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='adoptionapplication',
-            name='has_stable_power',
+            model_name="adoptionapplication",
+            name="has_stable_power",
         ),
     ]

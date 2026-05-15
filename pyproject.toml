@@ -10,3 +10,9 @@ dependencies = [
     "gunicorn>=26.0.0",
     "pillow>=12.2.0",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.13",
+    "ty>=0.0.36",
+]
