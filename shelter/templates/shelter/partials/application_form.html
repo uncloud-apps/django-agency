@@ -12,41 +12,68 @@
     </div>
   {% endif %}
 
-  <div class="space-y-5">
-    {% for field in form %}
+  <div class="mb-8">
+    <p class="mono text-xs font-semibold uppercase tracking-widest text-stone-400 mb-4">01 — Contact</p>
+    <div class="space-y-4">
+
       <div>
-        <label class="block font-semibold text-stone-700 mb-1" for="{{ field.id_for_label }}">
-          {{ field.label }}
-          {% if field.field.required %}<span class="text-red-500">*</span>{% endif %}
+        <label class="block font-semibold text-stone-700 mb-1" for="{{ form.applicant_name.id_for_label }}">
+          {{ form.applicant_name.label }} <span class="text-red-500">*</span>
         </label>
-
-        {% if field.field.widget.input_type == 'radio' %}
-          <div class="space-y-1 mt-1">
-            {% for choice in field %}
-              <label class="flex items-center gap-2 cursor-pointer text-stone-700">
-                {{ choice.tag }} {{ choice.choice_label }}
-              </label>
-            {% endfor %}
-          </div>
-        {% else %}
-          {{ field|add_class:"w-full border border-stone-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-stone-400" }}
-        {% endif %}
-
-        {% if field.errors %}
-          {% for error in field.errors %}
-            <p class="text-red-600 text-sm mt-1">{{ error }}</p>
-          {% endfor %}
-        {% endif %}
-
-        {% if field.help_text %}
-          <p class="text-stone-400 text-sm mt-1">{{ field.help_text }}</p>
-        {% endif %}
+        {{ form.applicant_name|add_class:"w-full border border-stone-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400" }}
+        {% for error in form.applicant_name.errors %}<p class="text-red-600 text-sm mt-1">{{ error }}</p>{% endfor %}
       </div>
-    {% endfor %}
+
+      <div>
+        <label class="block font-semibold text-stone-700 mb-1" for="{{ form.applicant_email.id_for_label }}">
+          {{ form.applicant_email.label }} <span class="text-red-500">*</span>
+        </label>
+        {{ form.applicant_email|add_class:"w-full border border-stone-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400" }}
+        {% for error in form.applicant_email.errors %}<p class="text-red-600 text-sm mt-1">{{ error }}</p>{% endfor %}
+      </div>
+
+      <div>
+        <label class="block font-semibold text-stone-700 mb-1" for="{{ form.applicant_location.id_for_label }}">
+          {{ form.applicant_location.label }} <span class="text-red-500">*</span>
+        </label>
+        {{ form.applicant_location|add_class:"w-full border border-stone-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400" }}
+        {% for error in form.applicant_location.errors %}<p class="text-red-600 text-sm mt-1">{{ error }}</p>{% endfor %}
+      </div>
+
+    </div>
+  </div>
+
+  <div class="pt-6 border-t border-stone-100">
+    <p class="mono text-xs font-semibold uppercase tracking-widest text-stone-400 mb-4">02 — Compatibility</p>
+    <div class="space-y-4">
+
+      <div>
+        <label class="block font-semibold text-stone-700 mb-2">
+          {{ form.decibel_tolerance.label }} <span class="text-red-500">*</span>
+        </label>
+        <div class="space-y-2">
+          {% for choice in form.decibel_tolerance %}
+            <label class="flex items-center gap-3 cursor-pointer text-stone-700 p-2 rounded-lg hover:bg-stone-50 transition-colors">
+              {{ choice.tag }} {{ choice.choice_label }}
+            </label>
+          {% endfor %}
+        </div>
+        {% for error in form.decibel_tolerance.errors %}<p class="text-red-600 text-sm mt-1">{{ error }}</p>{% endfor %}
+      </div>
+
+      <div>
+        <label class="block font-semibold text-stone-700 mb-1" for="{{ form.why_this_server.id_for_label }}">
+          {{ form.why_this_server.label }} <span class="text-red-500">*</span>
+        </label>
+        {{ form.why_this_server|add_class:"w-full border border-stone-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400" }}
+        {% for error in form.why_this_server.errors %}<p class="text-red-600 text-sm mt-1">{{ error }}</p>{% endfor %}
+      </div>
+
+    </div>
   </div>
 
   <button type="submit"
-          class="mt-6 w-full bg-stone-800 text-amber-50 py-3 rounded-lg font-semibold hover:bg-stone-700 transition-colors">
+          class="mt-8 w-full bg-amber-500 text-stone-900 py-3 rounded-lg font-bold hover:bg-amber-400 transition-colors text-lg">
     Submit Adoption Application
   </button>
 </form>

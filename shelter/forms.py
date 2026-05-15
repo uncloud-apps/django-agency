@@ -3,6 +3,12 @@ from .models import AdoptionApplication, Server
 
 
 class AdoptionApplicationForm(forms.ModelForm):
+    decibel_tolerance = forms.ChoiceField(
+        choices=AdoptionApplication.DecibelTolerance.choices,
+        widget=forms.RadioSelect,
+        label='Noise tolerance',
+    )
+
     class Meta:
         model = AdoptionApplication
         fields = [
@@ -16,11 +22,9 @@ class AdoptionApplicationForm(forms.ModelForm):
             'applicant_name': 'Your name',
             'applicant_email': 'Your email',
             'applicant_location': 'Where would the server live?',
-            'decibel_tolerance': 'Noise tolerance',
             'why_this_server': 'Why this particular server?',
         }
         widgets = {
-            'decibel_tolerance': forms.RadioSelect,
             'why_this_server': forms.Textarea(attrs={'rows': 4}),
         }
 

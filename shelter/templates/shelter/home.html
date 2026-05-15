@@ -4,31 +4,32 @@
 
 {% block content %}
 
-<section class="text-center mb-14">
-  <h1 class="text-4xl font-bold mb-4 leading-tight">
-    These servers were abandoned<br>
-    <span class="text-stone-500 font-normal">when their owners moved to the cloud.</span>
+<section class="text-center mb-14 pt-6 pb-12 border-b border-stone-200">
+  <p class="mono text-xs uppercase tracking-widest text-stone-400 mb-4 font-semibold">// shelter.status = open</p>
+  <h1 class="text-5xl font-bold mb-4 leading-tight">
+    These servers were abandoned<span class="cursor text-amber-500">_</span><br>
+    <span class="text-stone-500 font-normal text-4xl">when their owners moved to the cloud.</span>
   </h1>
-  <p class="text-stone-600 max-w-xl mx-auto text-lg leading-relaxed">
+  <p class="text-stone-600 max-w-xl mx-auto text-lg leading-relaxed mt-6">
     They're loyal, battle-tested, and ready to serve again. All they need is
     a stable power supply and someone who gives a rack unit.
   </p>
-  <a href="/servers/" class="inline-block mt-6 bg-stone-800 text-amber-50 px-8 py-3 rounded-xl text-lg font-semibold hover:bg-stone-700 transition-colors">
+  <a href="/servers/" class="inline-block mt-8 bg-amber-500 text-stone-900 px-8 py-3 rounded-xl text-lg font-bold hover:bg-amber-400 transition-colors shadow-sm">
     Browse Available Servers
   </a>
 </section>
 
 <section class="grid grid-cols-3 gap-4 mb-14 text-center">
   <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
-    <div class="text-4xl font-bold text-stone-800">{{ stats.available }}</div>
+    <div class="text-4xl font-bold text-stone-800 mono">{{ stats.available }}</div>
     <div class="text-stone-500 text-sm mt-1">Awaiting a home</div>
   </div>
   <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
-    <div class="text-4xl font-bold text-emerald-700">{{ stats.adopted }}</div>
+    <div class="text-4xl font-bold text-stone-800 mono">{{ stats.adopted }}</div>
     <div class="text-stone-500 text-sm mt-1">Successfully adopted</div>
   </div>
   <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
-    <div class="text-4xl font-bold text-amber-600">{{ stats.pending_applications }}</div>
+    <div class="text-4xl font-bold text-stone-800 mono">{{ stats.pending_applications }}</div>
     <div class="text-stone-500 text-sm mt-1">Pending applications</div>
   </div>
 </section>
@@ -49,7 +50,8 @@
 </section>
 {% endif %}
 
-<section class="bg-stone-100 rounded-2xl p-8 text-center">
+<section class="bg-white rounded-2xl p-8 text-center border border-stone-200">
+  <p class="mono text-xs uppercase tracking-widest text-stone-400 mb-3 font-semibold">// mission.txt</p>
   <h2 class="text-xl font-bold mb-3">Our mission</h2>
   <p class="text-stone-600 max-w-2xl mx-auto leading-relaxed">
     The cloud revolution left millions of servers without purpose. We believe every machine

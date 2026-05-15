@@ -5,62 +5,66 @@
 
 {% block content %}
 
-<a href="/servers/" class="text-stone-500 text-sm hover:text-stone-700 mb-6 inline-block">&larr; Back to listings</a>
+<a href="/servers/" class="inline-flex items-center gap-2 text-stone-600 hover:text-stone-800 mb-8 font-medium transition-colors group">
+  <span class="group-hover:-translate-x-1 transition-transform inline-block">&larr;</span> Back to listings
+</a>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
   <div>
     {% if server.portrait %}
       <img src="{{ server.portrait.url }}" alt="Portrait of {{ server.name }}"
            class="w-full rounded-2xl shadow mb-6 object-cover" style="max-height: 400px;">
     {% else %}
-      <div class="w-full rounded-2xl bg-stone-100 flex items-center justify-center text-9xl mb-6" style="height: 300px;">
+      <div class="w-full rounded-2xl flex items-center justify-center text-9xl mb-6"
+           style="height: 300px; background-color: {{ server.species|species_bg }}; border: 3px solid {{ server.species|species_accent }}">
         {{ server.species|species_emoji }}
       </div>
     {% endif %}
 
-    <div class="bg-white rounded-2xl border border-stone-200 p-6">
-      <h3 class="font-bold text-stone-700 mb-3 text-xs uppercase tracking-wide">Profile</h3>
-      <dl class="space-y-2">
+    <div class="bg-white rounded-2xl border border-stone-200 p-6" style="border-top: 3px solid {{ server.species|species_accent }}">
+      <h3 class="mono font-semibold text-stone-400 mb-4 text-xs uppercase tracking-widest">Profile</h3>
+      <dl class="space-y-2.5">
         <div class="flex justify-between">
           <dt class="text-stone-500">Species</dt>
-          <dd class="font-medium">{{ server.get_species_display }}</dd>
+          <dd class="font-semibold">{{ server.get_species_display }}</dd>
         </div>
         <div class="flex justify-between">
           <dt class="text-stone-500">Size</dt>
-          <dd class="font-medium">{{ server.get_size_display }}</dd>
+          <dd class="font-semibold mono">{{ server.get_size_display }}</dd>
         </div>
         <div class="flex justify-between">
           <dt class="text-stone-500">Age</dt>
-          <dd class="font-medium">{{ server.age_years }} years</dd>
+          <dd class="font-semibold">{{ server.age_years }} years</dd>
         </div>
         <div class="flex justify-between">
           <dt class="text-stone-500">Pronouns</dt>
-          <dd class="font-medium">{{ server.get_sex_display }}</dd>
+          <dd class="font-semibold">{{ server.get_sex_display }}</dd>
         </div>
         <div class="flex justify-between">
           <dt class="text-stone-500">Status</dt>
-          <dd class="font-medium">{{ server.get_status_display }}</dd>
+          <dd class="font-semibold">{{ server.get_status_display }}</dd>
         </div>
         <div class="flex justify-between">
           <dt class="text-stone-500">Adoption fee</dt>
-          <dd class="font-medium">{{ server.adoption_fee_display }}</dd>
+          <dd class="font-semibold">{{ server.adoption_fee_display }}</dd>
         </div>
       </dl>
 
       {% if server.special_needs %}
-        <div class="mt-4 pt-4 border-t border-stone-100">
-          <p class="text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1">Special needs</p>
+        <div class="mt-5 pt-5 border-t border-stone-100">
+          <p class="mono text-xs font-semibold uppercase tracking-widest text-stone-400 mb-1.5">Special needs</p>
           <p class="text-stone-700">{{ server.special_needs }}</p>
         </div>
       {% endif %}
 
       {% if server.personality_list %}
-        <div class="mt-4 pt-4 border-t border-stone-100">
-          <p class="text-xs font-semibold uppercase tracking-wide text-stone-500 mb-2">Personality</p>
+        <div class="mt-5 pt-5 border-t border-stone-100">
+          <p class="mono text-xs font-semibold uppercase tracking-widest text-stone-400 mb-2">Personality</p>
           <div class="flex flex-wrap gap-2">
             {% for trait in server.personality_list %}
-              <span class="bg-amber-100 text-amber-800 text-sm px-2 py-0.5 rounded-full">{{ trait }}</span>
+              <span class="text-sm px-3 py-1 rounded-full font-medium"
+                    style="background-color: {{ server.species|species_bg }}; color: {{ server.species|species_accent }}">{{ trait }}</span>
             {% endfor %}
           </div>
         </div>
@@ -69,16 +73,16 @@
   </div>
 
   <div>
-    <h1 class="text-3xl font-bold mb-1">{{ server.name }}</h1>
-    <p class="text-stone-500 mb-6">{{ server.age_years }}-year-old {{ server.get_species_display }}</p>
+    <h1 class="text-4xl font-bold mb-1">{{ server.name }}</h1>
+    <p class="text-stone-500 mb-6 mono text-sm">{{ server.age_years }}-year-old {{ server.get_species_display }}</p>
 
-    <div class="prose prose-stone max-w-none mb-8 text-stone-700 leading-relaxed">
+    <div class="text-stone-700 leading-relaxed mb-8">
       {{ server.backstory|linebreaks }}
     </div>
 
     {% if server.status == 'available' or server.status == 'on_hold' %}
       <div class="bg-white rounded-2xl border border-stone-200 p-6">
-        <h2 class="text-xl font-bold mb-1">Apply to adopt {{ server.name }}</h2>
+        <h2 class="text-2xl font-bold mb-1">Apply to adopt {{ server.name }}</h2>
         <p class="text-stone-500 mb-6">
           Fill out the form below and our team will review your application.
           We just want to make sure {{ server.name }} goes somewhere good.

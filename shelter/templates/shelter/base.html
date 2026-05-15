@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Server Adoption Agency{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            serif: ['Georgia', 'Cambria', 'serif'],
+            serif: ['IBM Plex Serif', 'Georgia', 'serif'],
+            mono: ['IBM Plex Mono', 'Courier New', 'monospace'],
           }
         }
       }
@@ -18,16 +22,26 @@
   </script>
   <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
   <style>
-    body { font-family: Georgia, Cambria, serif; font-size: 17px; }
-    .mono { font-family: 'Courier New', monospace; }
+    body {
+      font-family: 'IBM Plex Serif', Georgia, serif;
+      font-size: 17px;
+      background-color: #fffbeb;
+      background-image: radial-gradient(circle, rgba(100,80,40,0.1) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+    .mono { font-family: 'IBM Plex Mono', 'Courier New', monospace; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .cursor { animation: blink 1.1s step-end infinite; }
   </style>
 </head>
-<body class="bg-amber-50 text-stone-800 min-h-screen flex flex-col">
+<body class="text-stone-800 min-h-screen flex flex-col">
 
-  <header class="bg-stone-800 text-amber-50 py-4 px-6">
+  <header class="bg-stone-900 text-amber-50 py-4 px-6 border-b-2 border-amber-400">
     <div class="max-w-5xl mx-auto flex items-center justify-between">
-      <a href="/" class="text-xl font-bold tracking-tight hover:text-amber-300 transition-colors">Server Adoption Agency</a>
-      <nav class="flex gap-6 text-xl">
+      <a href="/" class="mono text-lg font-semibold tracking-tight hover:text-amber-300 transition-colors">
+        <span class="text-amber-400">&gt;</span> server-adoption
+      </a>
+      <nav class="flex gap-8 text-base">
         <a href="/" class="hover:text-amber-300 transition-colors">Home</a>
         <a href="/servers/" class="hover:text-amber-300 transition-colors">Browse Servers</a>
       </nav>
