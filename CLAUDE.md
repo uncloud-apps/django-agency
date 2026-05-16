@@ -1,6 +1,6 @@
 # Server Adoption Agency — Django demo
 
-A shelter for servers abandoned when their owners moved to the cloud. Built as a live demo for a Django meetup talk showcasing Uncloud.
+A shelter for servers abandoned when their owners moved to the cloud. Built as a live demo showcasing Uncloud.
 
 ## Running locally
 

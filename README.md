@@ -2,7 +2,7 @@
 
 > **Demo app** — not intended for production use. SECRET_KEY is committed, and there is no real auth beyond Django admin.
 
-A Django demo app for the meetup talk. A shelter for abandoned servers whose previous owners moved to the cloud.
+A Django demo app to showcase Uncloud: a shelter for abandoned servers whose previous owners moved to the cloud.
 
 <img width="1396" height="719" alt="image" src="https://github.com/user-attachments/assets/acaf34b5-6a6b-401c-8f24-a97a4be0c7d9" />
 
