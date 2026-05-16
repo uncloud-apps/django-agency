@@ -5,6 +5,7 @@ A shelter for servers abandoned when their owners moved to the cloud. Built as a
 ## Running locally
 
 ```bash
+mise install
 uv sync
 uv run python manage.py migrate
 uv run python manage.py seed_shelter   # populates 6 servers

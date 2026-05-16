@@ -13,16 +13,19 @@ Developed with AI assistance.
 ## Run locally
 
 ```bash
+# Install all dev tools
+mise install
+
 # Install dependencies
 uv sync
 
 # Apply migrations
 uv run python manage.py migrate
 
-# Seed with 6 example servers
+# Seed with 6 example servers (optional, already done in Dockerfile)
 uv run python manage.py seed_shelter
 
-# Create an admin account
+# Create an admin account (optional)
 uv run python manage.py createsuperuser
 
 # Start the dev server
