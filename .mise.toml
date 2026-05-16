@@ -22,3 +22,7 @@ run = "uv run python manage.py runserver"
 [tasks.test]
 description = "Run the test suite"
 run = "uv run python manage.py test shelter"
+
+[tasks.serve]
+description = "Start gunicorn"
+run = "uv run gunicorn server_adoption.wsgi"
