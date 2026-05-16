@@ -2,3 +2,23 @@
 python = "3.14"
 uv = "0.11.14"
 pre-commit = "4.6.0"
+
+[tasks.install]
+description = "Install dependencies"
+run = "uv sync"
+
+[tasks.migrate]
+description = "Apply database migrations"
+run = "uv run python manage.py migrate"
+
+[tasks.seed]
+description = "Seed the shelter with example servers"
+run = "uv run python manage.py seed_shelter"
+
+[tasks.dev]
+description = "Start the development server"
+run = "uv run python manage.py runserver"
+
+[tasks.test]
+description = "Run the test suite"
+run = "uv run python manage.py test shelter"

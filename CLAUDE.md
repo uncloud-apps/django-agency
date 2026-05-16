@@ -25,6 +25,7 @@ uv run python manage.py test shelter
 - `django-htmx` middleware for `request.htmx` detection
 - Pillow for portrait `ImageField`
 - uv for dependency management
+- mise for dev environment management (Python, uv, pre-commit versions pinned in `.mise.toml`)
 
 ## Project layout
 
