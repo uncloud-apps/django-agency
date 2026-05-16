@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # environment variable.
 SECRET_KEY = "w!4uu6ksu8dmf-r5fsor@s_(&am67jl4bzzxg+@nq%or@co1u2"
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 

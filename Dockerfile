@@ -17,6 +17,8 @@ RUN uv sync --frozen --no-dev
 
 COPY . .
 
+RUN chmod +x docker-entrypoint.sh
+
 EXPOSE 8000
 
-CMD ["sh", "-c", "python manage.py migrate --noinput && gunicorn server_adoption.wsgi:application --bind 0.0.0.0:8000 --workers 2 --timeout 60"]
+ENTRYPOINT ["./docker-entrypoint.sh"]

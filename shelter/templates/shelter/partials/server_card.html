@@ -16,7 +16,9 @@
 
   <div class="p-5 flex flex-col flex-1">
     <div class="mb-1">
-      <h3 class="text-lg font-bold">{{ server.name }}</h3>
+      <a href="/servers/{{ server.slug }}/" class="hover:underline">
+        <h3 class="text-lg font-bold">{{ server.name }}</h3>
+      </a>
     </div>
 
     <p class="text-stone-500 text-sm mb-3 mono">

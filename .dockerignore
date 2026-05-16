@@ -1,8 +1,11 @@
 *
 
 !manage.py
+!docker-entrypoint.sh
 !pyproject.toml
 !uv.lock
+!db/.gitignore
 !server_adoption/**/*.py
 !shelter/**/*.py
-!shelter/**/templates/**
+!shelter/**/*.png
+!shelter/**/*.html

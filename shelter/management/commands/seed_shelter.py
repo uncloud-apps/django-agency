@@ -1,5 +1,11 @@
+import os
+
+from django.core.files import File
 from django.core.management.base import BaseCommand
+
 from shelter.models import Server
+
+IMG_DIR = os.path.join(os.path.dirname(__file__), "img")
 
 SERVERS = [
     {
@@ -89,7 +95,8 @@ Patches ran a game server, an ML rig, a NAS, and a seedbox at various points in 
         "size": Server.Size.FULL_TOWER,
         "sex": Server.Sex.HE,
         "age_years": 18,
-        "status": Server.Status.AVAILABLE,
+        "status": Server.Status.ADOPTED,
+        "adopted_by_name": "Professor Emeritus D. Kernighan",
         "adoption_fee_cents": 0,
         "is_featured": False,
         "personality": "patient, wise, compiles kernel 2.4 from memory",
@@ -119,6 +126,12 @@ class Command(BaseCommand):
             else:
                 skipped += 1
                 self.stdout.write(f"  Skipped (exists): {server.name}")
+
+            img_path = os.path.join(IMG_DIR, f"{data['slug']}.png")
+            if os.path.exists(img_path):
+                with open(img_path, "rb") as f:
+                    server.portrait.save(f"{data['slug']}.png", File(f), save=True)
+                self.stdout.write(f"    Portrait set for {server.name}")
 
         self.stdout.write(
             self.style.SUCCESS(f"\nDone. {created} created, {skipped} already existed.")
