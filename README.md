@@ -4,6 +4,8 @@
 
 A Django demo app for the meetup talk. A shelter for abandoned servers whose previous owners moved to the cloud.
 
+<img width="1396" height="719" alt="image" src="https://github.com/user-attachments/assets/acaf34b5-6a6b-401c-8f24-a97a4be0c7d9" />
+
 Built with Django 6, HTMX, Tailwind (CDN), SQLite. Dev environment managed with mise (`.mise.toml` pins Python, uv, and pre-commit versions).
 
 Developed with AI assistance.
