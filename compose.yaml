@@ -1,12 +1,10 @@
 services:
   web:
     build: .
-    ports:
-      - "8000:8000"
-    environment:
-      - DJANGO_SETTINGS_MODULE=server_adoption.settings
+    x-ports:
+      - FIXME_HOST:8000/https
     volumes:
-      - db:/app/db.sqlite3
+      - db:/app/db
       - media:/app/media
     restart: unless-stopped
 
