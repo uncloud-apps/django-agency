@@ -4,7 +4,6 @@
 !docker-entrypoint.sh
 !pyproject.toml
 !uv.lock
-!db/.gitignore
 !server_adoption/**/*.py
 !shelter/**/*.py
 !shelter/**/*.png

@@ -42,7 +42,5 @@ After adding portraits, update each server's `portrait` field via the admin or a
 
 ## Deploying to Uncloud
 
-TODO: wire this up with `uc deploy`.
-
-The `compose.yaml` is ready. Run `uc machine add` to connect your servers, then `uc deploy` to deploy.
+The `compose.yaml` is ready. Run `uc machine init` to initialise your cluster, then `uc deploy` to deploy.
 The SQLite database and media files use named volumes so they survive redeploys.

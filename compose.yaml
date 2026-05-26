@@ -1,12 +1,17 @@
 services:
-  web:
-    build: .
-    x-ports:
-      - FIXME_HOST:8000/https
+  demo:
+    build:
+      platforms:
+        - linux/amd64
+    environment:
+      WORKERS: 2
     volumes:
       - db:/app/db
       - media:/app/media
-    restart: unless-stopped
+    x-ports:
+      - 8000/https
+    x-pre_deploy:
+      command: python manage.py migrate
 
 volumes:
   db:
