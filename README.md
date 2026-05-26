@@ -22,7 +22,7 @@ uv sync
 # Apply migrations
 uv run python manage.py migrate
 
-# Seed with 6 example servers (optional, already done in Dockerfile)
+# Seed with 6 example servers (optional)
 uv run python manage.py seed_shelter
 
 # Create an admin account (optional)
