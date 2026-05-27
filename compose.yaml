@@ -4,15 +4,29 @@ services:
       platforms:
         - linux/amd64
     environment:
+      # DJANGO_SECRET_KEY and POSTGRES_PASSWORD is set in .env file
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@db.internal:5432/postgres
       WORKERS: 2
-    volumes:
-      - db:/app/db
-      - media:/app/media
     x-ports:
-      - 8000/https
+#      - 8000/https
+      - django-demo.psviderski.name:8000/https
     x-pre_deploy:
       command: python manage.py migrate
+    depends_on:
+      - db
+    scale: 2
+
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql
+    healthcheck:
+      test: pg_isready -U postgres
+      start_period: 10s
+      start_interval: 1s
 
 volumes:
   db:
-  media:

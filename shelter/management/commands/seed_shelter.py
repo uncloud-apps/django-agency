@@ -127,10 +127,12 @@ class Command(BaseCommand):
                 skipped += 1
                 self.stdout.write(f"  Skipped (exists): {server.name}")
 
-            img_path = os.path.join(IMG_DIR, f"{data['slug']}.png")
+            img_path = os.path.join(IMG_DIR, f"{data['slug']}.jpg")
             if os.path.exists(img_path):
                 with open(img_path, "rb") as f:
-                    server.portrait.save(f"{data['slug']}.png", File(f), save=True)
+                    portrait = File(f)
+                    portrait.content_type = "image/jpeg"
+                    server.portrait.save(f"{data['slug']}.jpg", portrait, save=True)
                 self.stdout.write(f"    Portrait set for {server.name}")
 
         self.stdout.write(

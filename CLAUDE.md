@@ -21,10 +21,10 @@ uv run python manage.py test shelter
 
 ## Stack
 
-- Django 6, SQLite, gunicorn
+- Django 6, Postgres 18 (SQLite fallback for local dev), gunicorn
 - HTMX and Tailwind via CDN — no build step
 - `django-htmx` middleware for `request.htmx` detection
-- Pillow for portrait `ImageField`
+- Pillow for portrait `ImageField`; portraits stored as bytea in Postgres via `django-db-file-storage` (no media volume)
 - uv for dependency management
 - mise for dev environment management (Python, uv, pre-commit versions pinned in `.mise.toml`)
 
@@ -33,9 +33,10 @@ uv run python manage.py test shelter
 - `server_adoption/` — Django project package (settings, root urls, wsgi)
 - `shelter/` — the single app (models, views, forms, admin, templates, templatetags)
 - `shelter/management/commands/seed_shelter.py` — idempotent seed with 6 hand-written servers
+- `shelter/management/commands/img/` — source portrait PNGs the seed loads into the DB, one per slug
 - `shelter/templates/shelter/partials/` — HTMX swap targets (server grid, application form, thanks)
 - `shelter/templatetags/shelter_extras.py` — `species_emoji`, `species_accent`, `species_bg`, and `add_class` template filters
-- `media/portraits/` — AI-generated server portraits, gitignored, one per slug
+- `shelter/storage.py` — `InlineDatabaseFileStorage` subclass that serves portraits inline (no attachment header)
 
 ## Key conventions
 

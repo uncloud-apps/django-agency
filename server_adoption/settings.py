@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# DEMO APP — never deploy this to production as-is. SECRET_KEY is committed
-# and ALLOWED_HOSTS is wide open. In a real project, read SECRET_KEY from an
-# environment variable.
-SECRET_KEY = "w!4uu6ksu8dmf-r5fsor@s_(&am67jl4bzzxg+@nq%or@co1u2"
+# DEMO APP — never deploy this to production as-is. The fallback SECRET_KEY is
+# committed and ALLOWED_HOSTS is wide open. In compose/Uncloud deployments,
+# DJANGO_SECRET_KEY is read from the .env file.
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "w!4uu6ksu8dmf-r5fsor@s_(&am67jl4bzzxg+@nq%or@co1u2")
 
 DEBUG = True
 
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_htmx",
+    "db_file_storage",
     "shelter",
 ]
 
@@ -80,10 +84,10 @@ WSGI_APPLICATION = "server_adoption.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db" / "db.sqlite3",
-    }
+    "default": dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db' / 'db.sqlite3'}",
+        conn_max_age=600,
+    ),
 }
 
 
@@ -125,8 +129,14 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 WHITENOISE_USE_FINDERS = True
 
-MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# Portraits are stored as bytea in Postgres via db_file_storage. Files are served
+# through the /files/ URL mounted in server_adoption/urls.py — no MEDIA_ROOT.
+STORAGES = {
+    "default": {"BACKEND": "shelter.storage.InlineDatabaseFileStorage"},
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

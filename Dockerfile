@@ -22,7 +22,6 @@ COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
 
 COPY --chown=app:app . .
-RUN mkdir db media
 
 EXPOSE 8000
 HEALTHCHECK --start-period=10s --start-interval=1s CMD curl -f http://localhost:8000

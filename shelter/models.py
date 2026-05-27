@@ -53,7 +53,10 @@ class Server(models.Model):
     backstory = models.TextField()
     personality = models.CharField(max_length=255, help_text="Comma-separated traits")
     special_needs = models.CharField(max_length=255, blank=True)
-    portrait = models.ImageField(upload_to="portraits/", blank=True)
+    portrait = models.ImageField(
+        upload_to="shelter.ServerPortrait/bytes/filename/mimetype",
+        blank=True,
+    )
     is_featured = models.BooleanField(default=False)
     adopted_by_name = models.CharField(max_length=120, blank=True)
     adopted_on = models.DateField(null=True, blank=True)
@@ -119,3 +122,14 @@ class AdoptionApplication(models.Model):
 
     def __str__(self) -> str:
         return f"{self.applicant_name} -> {self.server.name}"
+
+
+class ServerPortrait(models.Model):
+    """Blob storage for Server.portrait, managed by db_file_storage."""
+
+    bytes = models.BinaryField()
+    filename = models.CharField(max_length=255, unique=True)
+    mimetype = models.CharField(max_length=64)
+
+    def __str__(self) -> str:
+        return self.filename
